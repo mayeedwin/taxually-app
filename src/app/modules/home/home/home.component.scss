@@ -1,0 +1,57 @@
+.home {
+  padding: 20px;
+  height: 100vh;
+  overflow: auto;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px 20px;
+    border-radius: 10px;
+    gap: 15px;
+  }
+
+  button {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: #222;
+      color: #fff;
+      border: 1px solid #222;
+    }
+  }
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-item-title {
+  font-size: 25px;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.photo-listing {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}

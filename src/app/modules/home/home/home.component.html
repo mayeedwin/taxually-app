@@ -1,1 +1,15 @@
-<p>home works!</p>
+<section class="home">
+  <div class="nav-item-title">Taxually.com</div>
+  <nav>
+    <div class="nav-item">
+      <button>Upload File</button>
+    </div>
+    <div class="nav-item">
+      <span> Hey Maye! </span>
+      <button>Signout</button>
+    </div>
+  </nav>
+  <section class="photo-listing">
+    <app-photo *ngFor="let photo of photoList" [data]="photo"></app-photo>
+  </section>
+</section>

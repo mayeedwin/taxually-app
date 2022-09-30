@@ -1,0 +1,9 @@
+<div *ngIf="data" class="photo">
+  <img class="photo-image" [src]="data.url" alt="T.X" />
+  <div class="photo-content">
+    <div class="photo-content-title">
+      {{ data.title }}
+    </div>
+    <button class="photo-button">Delete</button>
+  </div>
+</div>
