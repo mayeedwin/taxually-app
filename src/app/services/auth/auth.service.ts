@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models';
 
 @Injectable({
@@ -8,7 +9,7 @@ export class AuthService {
   // Properties.
   usersDB = [] as User[];
 
-  constructor() {
+  constructor(private router: Router) {
     // Check if there are users in local storage.
     const users = localStorage.getItem('users');
     // Set the users.
@@ -24,7 +25,29 @@ export class AuthService {
           },
         ];
     // Set the users in the database.
-    this.usersDB = usersInDB;
+    this.setUsers(usersInDB);
+  }
+
+  /**
+   * This method returns the current user.
+   * @method getCurrentUser
+   */
+  getCurrentUser(): User | null {
+    // Get the user from local storage.
+    const user = localStorage.getItem('user');
+    // Check if the user exists.
+    return user ? JSON.parse(user) : null;
+  }
+
+  /**
+   * This method sets the users in the database.
+   * @method setUsers
+   */
+  setUsers(users: User[]) {
+    // Save to local storage.
+    localStorage.setItem('users', JSON.stringify(users));
+    // Set state.
+    this.usersDB = users;
   }
 
   /**
@@ -71,5 +94,7 @@ export class AuthService {
   logout() {
     // Remove the user from local storage.
     localStorage.removeItem('user');
+    // Navigate to the login page.
+    this.router.navigate(['/login']);
   }
 }

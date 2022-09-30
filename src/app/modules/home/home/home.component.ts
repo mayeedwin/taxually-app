@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PhotoItem } from 'src/app/models';
+import { PhotoItem, User } from 'src/app/models';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { PhotoItem } from 'src/app/models';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  user!: User;
   photoList: PhotoItem[] = [
     {
       id: 1,
@@ -21,7 +23,22 @@ export class HomeComponent implements OnInit {
       albumId: 1,
     },
   ];
-  constructor() {}
+  constructor(private authService: AuthService) {
+    // Set the user.
+    this.user = this.authService.getCurrentUser() as User;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Log the user.
+    console.log(this.user);
+  }
+
+  /**
+   * This method handles logout.
+   * @method logout
+   */
+  logout() {
+    // Logout.
+    this.authService.logout();
+  }
 }
