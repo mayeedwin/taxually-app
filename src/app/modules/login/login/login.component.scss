@@ -4,7 +4,7 @@
 }
 
 .form-group {
-  max-width: 400px;
+  max-width: 450px;
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
@@ -15,7 +15,8 @@
 .form {
   label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
   }
 
   input {
@@ -43,6 +44,20 @@
   margin-bottom: 10px;
 }
 
+.form-input-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .form-input-group {
+    flex: 1;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .form-info-group {
   margin-top: 20px;
   text-align: center;
@@ -59,4 +74,10 @@
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.form-required-field {
+  color: #f00;
+  font-size: 12px;
+  margin-top: 5px;
 }

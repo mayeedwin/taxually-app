@@ -7,47 +7,143 @@
       *ngIf="showLogin; else signupView"
       class="form"
       [formGroup]="loginForm"
+      (ngSubmit)="onSubmit('signin')"
     >
       <div class="form-input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" />
+        <label for="email">Email*</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          required
+          placeholder="Enter your email"
+          email="true"
+        />
+        <div
+          class="form-required-field"
+          *ngIf="emailControl?.errors?.['email']"
+        >
+          Email is not valid
+        </div>
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" />
+        <label for="password">Password*</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          required
+          placeholder="Enter your password"
+          minlength="6"
+        />
+        <div
+          class="form-required-field"
+          *ngIf="passwordControl?.errors?.['minLength']"
+        >
+          Password must be at least 6 characters
+        </div>
       </div>
-      <button class="form-btn" type="submit">Login</button>
+      <button [disabled]="loginForm.invalid" class="form-btn" type="submit">
+        Login
+      </button>
       <div class="form-info-group">
         Don't have an account? <span (click)="showLogin = false">Signup</span>
       </div>
     </form>
     <ng-template #signupView>
-      <form class="form" [formGroup]="signupForm">
-        <div class="form-input-group">
-          <label for="name">First Name</label>
-          <input type="text" id="firstName" formControlName="firstName" />
+      <form
+        class="form"
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit('signup')"
+      >
+        <div class="form-input-groups">
+          <div class="form-input-group">
+            <label for="name">First Name*</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              required
+              placeholder="Enter your first name"
+              minlength="2"
+            />
+          </div>
+          <div class="form-input-group">
+            <label for="name">Last Name*</label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              required
+              placeholder="Enter your last name"
+            />
+          </div>
         </div>
         <div class="form-input-group">
-          <label for="name">Last Name</label>
-          <input type="text" id="lastName" formControlName="lastName" />
+          <label for="email">Email*</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            required
+            placeholder="Enter your email"
+            email="true"
+          />
+          <div
+            class="form-required-field"
+            *ngIf="signupEmailControl?.errors?.['email']"
+          >
+            Email is not valid
+          </div>
         </div>
         <div class="form-input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" />
+          <label for="password">Password*</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            required
+            placeholder="Enter your password"
+            minlength="6"
+          />
+          <div
+            class="form-required-field"
+            *ngIf="signupPasswordControl?.errors?.['minLength']"
+          >
+            Password must be at least 6 characters
+          </div>
         </div>
         <div class="form-input-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" formControlName="password" />
-        </div>
-        <div class="form-input-group">
-          <label for="password">Confirm Password</label>
+          <label for="password">Confirm Password*</label>
           <input
             type="password"
             id="confirmPassword"
             formControlName="confirmPassword"
+            required
+            placeholder="Enter your password"
+            minlength="6"
           />
+          <div
+            class="form-required-field"
+            *ngIf="confirmPasswordControl?.errors?.['minLength'] || ( signupPasswordControl?.value !== confirmPasswordControl?.value)"
+          >
+            {{
+                confirmPasswordControl?.errors?.['minLength']
+                    ? "Password must be at least 6 characters"
+                    : "Passwords do not match"
+            }}
+          </div>
         </div>
-        <button class="form-btn" type="submit">Signup</button>
+        <button
+          [disabled]="
+            signupForm.invalid &&
+            signupPasswordControl?.value !== confirmPasswordControl?.value
+          "
+          class="form-btn"
+          type="submit"
+        >
+          Signup
+        </button>
         <div class="form-info-group">
           Already have an account?
           <span (click)="showLogin = true">Login</span>
