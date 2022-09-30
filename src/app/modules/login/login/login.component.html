@@ -1,1 +1,58 @@
-<p>login works!</p>
+<section class="login">
+  <section class="form-group">
+    <div class="form-group-header">
+      {{ showLogin ? "Welcome back, sign in!" : "Create an account!" }}
+    </div>
+    <form
+      *ngIf="showLogin; else signupView"
+      class="form"
+      [formGroup]="loginForm"
+    >
+      <div class="form-input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+      </div>
+      <div class="form-input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+      </div>
+      <button class="form-btn" type="submit">Login</button>
+      <div class="form-info-group">
+        Don't have an account? <span (click)="showLogin = false">Signup</span>
+      </div>
+    </form>
+    <ng-template #signupView>
+      <form class="form" [formGroup]="signupForm">
+        <div class="form-input-group">
+          <label for="name">First Name</label>
+          <input type="text" id="firstName" formControlName="firstName" />
+        </div>
+        <div class="form-input-group">
+          <label for="name">Last Name</label>
+          <input type="text" id="lastName" formControlName="lastName" />
+        </div>
+        <div class="form-input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" />
+        </div>
+        <div class="form-input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" />
+        </div>
+        <div class="form-input-group">
+          <label for="password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+          />
+        </div>
+        <button class="form-btn" type="submit">Signup</button>
+        <div class="form-info-group">
+          Already have an account?
+          <span (click)="showLogin = true">Login</span>
+        </div>
+      </form>
+    </ng-template>
+  </section>
+</section>
