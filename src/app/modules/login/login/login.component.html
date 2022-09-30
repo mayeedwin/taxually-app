@@ -136,7 +136,7 @@
         </div>
         <button
           [disabled]="
-            signupForm.invalid &&
+            signupForm.invalid ||
             signupPasswordControl?.value !== confirmPasswordControl?.value
           "
           class="form-btn"
