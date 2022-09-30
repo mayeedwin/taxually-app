@@ -1,7 +1,12 @@
 <section class="login">
   <section class="form-group">
     <div class="form-group-header">
-      {{ showLogin ? "Welcome back, sign in!" : "Create an account!" }}
+      <div>
+        {{ showLogin ? "Welcome back, sign in!" : "Create an account!" }}
+      </div>
+      <div class="form-required-field" *ngIf="alert.show">
+        {{ alert.message }}
+      </div>
     </div>
     <form
       *ngIf="showLogin; else signupView"

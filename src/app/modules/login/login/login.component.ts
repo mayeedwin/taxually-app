@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +12,20 @@ export class LoginComponent implements OnInit {
   // Properties.
   loginForm: FormGroup;
   signupForm: FormGroup;
-  showLogin: boolean = false;
+  showLogin: boolean = true;
+  alert: {
+    show: boolean;
+    message: string;
+  } = {
+    show: false,
+    message: '',
+  };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     // Set up the login form.
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -44,8 +52,24 @@ export class LoginComponent implements OnInit {
     switch (action) {
       case 'signin':
         // Sign in.
-        console.log('Sign in', this.loginForm.value);
-        console.log('Status', this.loginForm.status);
+        const { email, password } = this.loginForm.value;
+        // Authenticate the user.
+        const res = this.authService.login(email, password);
+        // Check the response.
+        if (res.status === 'success') {
+          // Navigate to the dashboard.
+          this.router.navigate(['/']);
+        } else {
+          // Show an error message.
+          this.alert = {
+            show: true,
+            message: res.message,
+          };
+          // Hide the alert after 3 seconds.
+          setTimeout(() => {
+            this.alert.show = false;
+          }, 3000);
+        }
         break;
       case 'signup':
         // Sign up.
