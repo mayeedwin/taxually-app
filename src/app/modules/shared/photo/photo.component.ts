@@ -8,12 +8,20 @@ import { PhotoItem } from 'src/app/models/index.model';
 })
 export class PhotoComponent implements OnInit {
   // Input.
+  formattedDate!: string;
   @Input() data!: PhotoItem;
   @Output() deleteFileEvent = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Format the date.
+    const date = new Date(this.data.createdAt);
+    this.formattedDate = date.toDateString();
+    // Get time from date.
+    const time = date.toLocaleTimeString();
+    this.formattedDate = `${this.formattedDate} ${time}`;
+  }
 
   /**
    * This method handles image delete.

@@ -4,6 +4,10 @@
     <div class="photo-content-title">
       {{ data.title }}
     </div>
+    <div class="photo-content-size">{{ data.sizeInKb }} KB</div>
+    <div class="photo-content-size">
+      {{ formattedDate || data.createdAt }}
+    </div>
     <button class="photo-button" (click)="deleteFile()">Delete</button>
   </div>
 </div>

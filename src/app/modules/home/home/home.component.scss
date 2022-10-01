@@ -62,6 +62,34 @@
   gap: 20px;
 }
 
+.home-ctas {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 10px;
+  gap: 15px;
+
+  select {
+    padding: 3px 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.sort,
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .search-input {
   background: #fff;
   margin-bottom: 15px;
@@ -110,5 +138,11 @@
       justify-content: space-between;
       width: 100%;
     }
+  }
+
+  .home-ctas {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
   }
 }

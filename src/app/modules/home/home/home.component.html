@@ -15,8 +15,8 @@
       <button (click)="logout()">Signout</button>
     </div>
   </nav>
-  <section class="search">
-    <div class="search-input">
+  <section class="home-ctas">
+    <div style="display: none" class="search-input">
       <input
         type="search"
         placeholder="Search for a photo..."
@@ -24,6 +24,23 @@
         (keyup)="clearSearchText()"
       />
       <button (click)="searchFile()">Search</button>
+    </div>
+    <div class="sort">
+      <span>Sort by</span>
+      <select [(ngModel)]="sortType" (change)="sortFiles()">
+        <option value="size-asc">Size(asc)</option>
+        <option value="size-desc">Size(desc)</option>
+        <option value="date-asc">Date created(asc)</option>
+        <option value="date-desc">Date created(desc)</option>
+      </select>
+    </div>
+    <div class="filter">
+      <span>Filter by</span>
+      <select [(ngModel)]="filterType" (change)="filterFiles()">
+        <option value="all">All</option>
+        <option value="smallest">Smallest</option>
+        <option value="largest">Largest</option>
+      </select>
     </div>
   </section>
   <section

@@ -26,7 +26,12 @@
   }
 }
 
-.photo-content-title {
+.photo-content-title,
+.photo-content-size {
   font-size: 15px;
   margin-bottom: 8px;
+}
+
+.photo-content-size {
+  font-size: 13px;
 }

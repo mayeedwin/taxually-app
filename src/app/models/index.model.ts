@@ -5,6 +5,9 @@ interface PhotoItem {
   title: string;
   url: string;
   type?: string;
+  createdAt: string;
+  size: number;
+  sizeInKb: number;
 }
 
 interface User {

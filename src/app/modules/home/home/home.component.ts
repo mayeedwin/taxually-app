@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   photoList: PhotoItem[] = [];
   originalList: PhotoItem[] = [];
   searchText: string = '';
+  sortType = 'size-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
+  filterType = 'all' as 'all' | 'smallest' | 'largest';
 
   constructor(
     private authService: AuthService,
@@ -37,6 +39,54 @@ export class HomeComponent implements OnInit {
     this.photoList = this.originalList.filter((photo) =>
       photo.title.toLowerCase().includes(this.searchText.toLowerCase())
     );
+  }
+
+  /**
+   * This method sorts the photo list.
+   * @method sortFiles
+   */
+  sortFiles() {
+    // Sort the photo list.
+    switch (this.sortType) {
+      case 'size-asc':
+        this.photoList = this.photoList.sort((a, b) => a.size - b.size);
+        break;
+      case 'size-desc':
+        this.photoList = this.photoList.sort((a, b) => b.size - a.size);
+        break;
+      case 'date-asc':
+        this.photoList = this.photoList.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateA.getTime() - dateB.getTime();
+        });
+        break;
+      case 'date-desc':
+        this.photoList = this.photoList.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB.getTime() - dateA.getTime();
+        });
+    }
+  }
+
+  /**
+   * This method filters the photo list.
+   * @method filterFiles
+   */
+  filterFiles() {
+    // Filter the photo list.
+    switch (this.filterType) {
+      case 'all':
+        this.photoList = this.originalList;
+        break;
+      case 'smallest':
+        this.photoList = [this.originalList.sort((a, b) => a.size - b.size)[0]];
+        break;
+      case 'largest':
+        this.photoList = [this.originalList.sort((a, b) => b.size - a.size)[0]];
+        break;
+    }
   }
 
   /**
@@ -67,6 +117,9 @@ export class HomeComponent implements OnInit {
         title: file.name.split('.')[0],
         url: reader.result as string,
         albumId: 1,
+        createdAt: new Date().toISOString(),
+        size: file.size,
+        sizeInKb: Math.round(file.size / 1024),
       };
       // Add the photo to the list.
       this.photoList.push(fileItem);
