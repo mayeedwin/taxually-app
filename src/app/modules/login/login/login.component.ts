@@ -95,6 +95,8 @@ export class LoginComponent implements OnInit {
         // Sign up.
         const { firstName, lastName, signupEmail, signupPassword } =
           this.signupForm.value;
+        // Set page title.
+        this.titleService.setTitle('Signup - Taxually Assessment');
         const signupRes = this.authService.signup({
           // Sign up the user.
           firstName,
