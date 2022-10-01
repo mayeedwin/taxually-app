@@ -25,8 +25,10 @@ export class HomeComponent implements OnInit {
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
-    this.photoList = this.storageService.getSavedPhotos(this.user.email);
-    this.originalList = this.photoList;
+    if (this.user) {
+      this.photoList = this.storageService.getSavedPhotos(this.user.email);
+      this.originalList = this.photoList;
+    }
   }
 
   ngOnInit(): void {

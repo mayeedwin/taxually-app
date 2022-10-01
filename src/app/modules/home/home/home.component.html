@@ -12,7 +12,7 @@
       aria-label="Upload a file"
       placeholder="Select a photo"
     />
-    <div class="nav-item">
+    <div *ngIf="user" class="nav-item">
       <span>{{ user.email }}</span>
       <button (click)="logout()">Signout</button>
     </div>
