@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     return (
+      // Only allow access if the user is logged in.
       this.authService.isLoggedIn() || this.router.createUrlTree(['/login'])
     );
   }
