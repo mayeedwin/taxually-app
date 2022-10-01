@@ -163,17 +163,11 @@ export class HomeComponent implements OnInit {
    * @method deleteFile
    */
   deleteFile(id: string) {
-    // Delete the photo.
-    this.photoList = this.photoList.filter((photo) => photo.id !== id);
-    this.originalList = this.originalList.filter((photo) => photo.id !== id);
-    // Save the photo list.
-    this.storageService.setStorage(this.originalList);
-    // Show success message.
-    this.globalService.setShowAlert.next({
-      show: true,
-      message: 'Image deleted successfully.',
-      type: 'success',
-    });
+    // Delete the image.
+    const list = this.storageService.deletePhoto(id, this.user.email);
+    // Update the photo list.
+    this.photoList = list;
+    this.originalList = list;
   }
 
   /**

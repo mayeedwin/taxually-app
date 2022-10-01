@@ -90,12 +90,19 @@ export class StorageService {
    * This method deletes a photo.
    * @method deletePhoto
    */
-  deletePhoto(photo: PhotoItem) {
+  deletePhoto(id: string | number, userId: string | number) {
     // Delete the photo from the list.
-    this.photoList = this.photoList.filter((item) => item.id !== photo.id);
-    // Set the photo list to local storage.
-    localStorage.setItem('photoList', JSON.stringify(this.photoList));
+    const newList = this.getSavedPhotos();
+    const filteredList = newList.filter((item) => item.id !== id);
+    // Set the photo list.
+    this.setStorage(filteredList);
+    // Show alert.
+    this.globalService.setShowAlert.next({
+      show: true,
+      message: 'Image deleted successfully.',
+      type: 'success',
+    });
     // Return the photo list.
-    return this.photoList;
+    return this.getSavedPhotos(userId);
   }
 }
