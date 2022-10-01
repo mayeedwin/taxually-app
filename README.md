@@ -6,7 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [x] User can create an account
 - [x] User can login or logout
-- [x] User can view their profile
 - [x] User can upload photos
 - [x] User can delete their photos
 - [x] User can view their uploaded photos
