@@ -70,7 +70,7 @@ export class AuthService {
     if (userExists) {
       return {
         status: 'error',
-        message: 'User already exists',
+        message: 'Sorry, email provided already in use',
         data: null,
       };
     } else {
@@ -110,20 +110,20 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(user));
         return {
           status: 'success',
-          message: 'Login successful',
+          message: 'Congrats! You are logged in',
           data: user,
         };
       } else {
         return {
           status: 'error',
-          message: 'Incorrect password',
+          message: 'Please check your password',
           data: null,
         };
       }
     } else {
       return {
         status: 'error',
-        message: 'User not found',
+        message: 'Sorry, user does not exist',
         data: null,
       };
     }

@@ -1,5 +1,5 @@
 .photo {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   padding: 10px;
   border-radius: 3px;
 
@@ -11,17 +11,17 @@
   }
 
   button {
-    padding: 4px 15px;
-    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border: 1px solid var(--border);
     border-radius: 4px;
-    background: #fff;
+    background: var(--white-1);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      background: rgb(206, 67, 67);
-      color: #fff;
-      border: 1px solid rgb(206, 67, 67);
+      background: var(--error-color);
+      color: var(--white-1);
+      border: 1px solid var(--error-color);
     }
   }
 }
@@ -29,9 +29,11 @@
 .photo-content-title,
 .photo-content-size {
   font-size: 15px;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
 }
 
 .photo-content-size {
   font-size: 13px;
+  color: var(--text-light);
 }

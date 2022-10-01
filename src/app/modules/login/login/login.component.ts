@@ -85,10 +85,10 @@ export class LoginComponent implements OnInit {
             show: true,
             message: res.message,
           };
-          // Hide the alert after 3 seconds.
+          // Hide the alert after 5 seconds.
           setTimeout(() => {
             this.alert.show = false;
-          }, 3000);
+          }, 5000);
         }
         break;
       case 'signup':
@@ -116,10 +116,10 @@ export class LoginComponent implements OnInit {
             show: true,
             message: signupRes.message,
           };
-          // Hide the alert after 3 seconds.
+          // Hide the alert after 5 seconds.
           setTimeout(() => {
             this.alert.show = false;
-          }, 3000);
+          }, 5000);
         }
         break;
       default:

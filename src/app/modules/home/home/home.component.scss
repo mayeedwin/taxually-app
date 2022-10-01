@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     padding: 15px 20px;
     border-radius: 10px;
     gap: 15px;
@@ -18,15 +18,15 @@
 
   button {
     padding: 8px 15px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--white-1);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 
     &:hover {
       background: #222;
-      color: #fff;
+      color: var(--white-1);
       border: 1px solid #222;
     }
   }
@@ -52,7 +52,7 @@
 
 .nav-item-title-info {
   font-size: 13px;
-  color: rgb(222, 89, 89);
+  color: var(--error-color);
   margin-bottom: 10px;
 }
 
@@ -63,21 +63,21 @@
 }
 
 .home-ctas {
-  background-color: #fff;
+  background-color: var(--white-1);
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   padding: 10px 20px;
   border-radius: 10px;
   gap: 15px;
 
   select {
     padding: 3px 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--white-1);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
@@ -91,9 +91,9 @@
 }
 
 .search-input {
-  background: #fff;
+  background: var(--white-1);
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 8px;
   display: inline-block;
 
@@ -104,7 +104,7 @@
     transition: all 0.2s ease-in-out;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid var(--border);
 
     &:focus {
       border: 1px solid #222;

@@ -7,7 +7,7 @@
   max-width: 450px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--white-1);
   border-radius: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
@@ -20,7 +20,7 @@
   }
 
   input {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 6px;
     display: block;
     padding: 12px 14px;
@@ -31,7 +31,7 @@
     background-color: #222;
     border: 0;
     border-radius: 6px;
-    color: #fff;
+    color: var(--white-1);
     cursor: pointer;
     display: block;
     margin-top: 20px;
@@ -77,7 +77,7 @@
 }
 
 .form-required-field {
-  color: #f00;
+  color: var(--error-color);
   font-size: 12px;
   margin-top: 5px;
 }
