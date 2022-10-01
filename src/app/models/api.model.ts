@@ -3,4 +3,5 @@ export interface PhotoItem {
   albumId: number;
   title: string;
   url: string;
+  type?: string;
 }

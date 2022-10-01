@@ -1,9 +1,14 @@
 <section class="home">
   <div class="nav-item-title">Taxually.com</div>
   <nav>
-    <div class="nav-item">
-      <button>Upload File</button>
-    </div>
+    <input
+      class="nav-item nav-item-file-input"
+      type="file"
+      id="file"
+      (change)="handleFileInput($event)"
+      aria-label="Upload a file"
+      placeholder="Select a photo"
+    />
     <div class="nav-item">
       <span> Hey, {{ user.firstName }}</span>
       <button (click)="logout()">Signout</button>

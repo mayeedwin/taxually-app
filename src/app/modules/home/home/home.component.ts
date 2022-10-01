@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     //   albumId: 1,
     // },
   ];
+
   constructor(private authService: AuthService) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
@@ -30,6 +31,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Log the user.
+  }
+
+  /**
+   * This method handles file input.
+   * @method handleFileInput
+   */
+  handleFileInput(event: any) {
+    // File input.
+    const file = event.target.files[0];
+    // Image to base64.
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      // Add the photo to the list.
+      this.photoList.push({
+        id: this.photoList.length + 1,
+        title: file.name.split('.')[0],
+        url: reader.result as string,
+        albumId: 1,
+      });
+    };
   }
 
   /**
