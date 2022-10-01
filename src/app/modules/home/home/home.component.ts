@@ -10,18 +10,18 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class HomeComponent implements OnInit {
   user!: User;
   photoList: PhotoItem[] = [
-    {
-      id: 1,
-      title: 'Photo 1',
-      url: 'https://via.placeholder.com/600/92c952',
-      albumId: 1,
-    },
-    {
-      id: 2,
-      title: 'Photo 2',
-      url: 'https://via.placeholder.com/600/771796',
-      albumId: 1,
-    },
+    // {
+    //   id: 1,
+    //   title: 'Photo 1',
+    //   url: 'https://via.placeholder.com/600/92c952',
+    //   albumId: 1,
+    // },
+    // {
+    //   id: 2,
+    //   title: 'Photo 2',
+    //   url: 'https://via.placeholder.com/600/771796',
+    //   albumId: 1,
+    // },
   ];
   constructor(private authService: AuthService) {
     // Set the user.
@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Log the user.
-    console.log(this.user);
   }
 
   /**

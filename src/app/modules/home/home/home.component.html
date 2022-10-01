@@ -5,11 +5,20 @@
       <button>Upload File</button>
     </div>
     <div class="nav-item">
-      <span> Hey Maye! </span>
+      <span> Hey, {{ user.firstName }}</span>
       <button (click)="logout()">Signout</button>
     </div>
   </nav>
-  <section class="photo-listing">
+  <section
+    class="photo-listing"
+    *ngIf="photoList && photoList.length > 0; else noPhotos"
+  >
     <app-photo *ngFor="let photo of photoList" [data]="photo"></app-photo>
   </section>
+  <ng-template #noPhotos>
+    <div class="no-photos">
+      <h1>No Photos</h1>
+      <p>Upload a photo to get started</p>
+    </div>
+  </ng-template>
 </section>
