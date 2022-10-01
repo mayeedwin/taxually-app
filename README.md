@@ -38,4 +38,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - The auth guard is used to **protect the home route**, and the login guard is used **to redirect the user to the home route** if they are already logged in.
 
+  - State management is done using **RxJS** and **Ngrx** (Work in progress).
+
 To view setup instructions, please visit the [setup instructions]('https://github.com/mayeedwin/taxually-app/blob/main/SETUP.md').

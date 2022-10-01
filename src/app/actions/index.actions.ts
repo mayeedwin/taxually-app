@@ -30,3 +30,6 @@ export const deleteFile = createAction(
     id: string;
   }>()
 );
+
+// Home page view action.
+export const homePageView = createAction('[Home] Home Page View');
