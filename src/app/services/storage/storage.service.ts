@@ -22,35 +22,33 @@ export class StorageService {
    * This method saves an image file.
    * @method saveImage
    */
-  saveImage(image: PhotoItem) {
+  saveImage(image: PhotoItem, userId: string | number) {
+    // Get current list.
+    const currentList = this.getSavedPhotos();
     // Check if image exists.
-    const imageExists = this.getSavedPhotos().find(
-      (item) => item.id === image.id
-    );
+    const imageExists = currentList.find((item) => item.id === image.id);
     // If image exists, return.
     if (imageExists) {
-      // Update the image.
-      this.photoList = this.photoList.map((item) => {
-        if (item.id === image.id) {
-          item = image;
-        }
-        return item;
-      });
       // Show alert.
       this.globalService.setShowAlert.next({
         show: true,
-        message: 'Image updated successfully.',
-        type: 'success',
+        message: 'Image already exists.',
+        type: 'error',
       });
+      // Return the photo list.
+      return this.getSavedPhotos(userId);
     } else {
       // Save the image to local storage.
-      this.setStorage([...this.photoList, image]);
+      currentList.push(image);
+      this.setStorage(currentList);
       // Show alert.
       this.globalService.setShowAlert.next({
         show: true,
         message: 'Image saved successfully.',
         type: 'success',
       });
+      // Return the photo list.
+      return this.getSavedPhotos(userId);
     }
   }
 

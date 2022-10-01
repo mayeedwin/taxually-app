@@ -130,10 +130,11 @@ export class HomeComponent implements OnInit {
             size: file.size,
             sizeInKb: Math.round(file.size / 1024),
           };
-          // Add the photo to the list.
-          this.photoList.push(fileItem);
           // Save the image.
-          this.storageService.saveImage(fileItem);
+          this.photoList = this.storageService.saveImage(
+            fileItem,
+            this.user.email
+          );
           // Reset the file input after the image is saved.
           setTimeout(() => {
             // Set uploading to false.
