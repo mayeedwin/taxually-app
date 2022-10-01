@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoItem, User } from 'src/app/models/index.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { GlobalService } from 'src/app/services/global/global.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private globalService: GlobalService
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
@@ -106,30 +108,54 @@ export class HomeComponent implements OnInit {
   handleFileInput(event: any) {
     // File input.
     const file = event.target.files[0];
-    // Image to base64.
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      // Set file item
-      const fileItem = {
-        id: file.name.split(' ').join('-').toLowerCase().split('.')[0],
-        userId: this.user.email,
-        title: file.name.split('.')[0],
-        url: reader.result as string,
-        albumId: 1,
-        createdAt: new Date().toISOString(),
-        size: file.size,
-        sizeInKb: Math.round(file.size / 1024),
-      };
-      // Add the photo to the list.
-      this.photoList.push(fileItem);
-      // Save the image.
-      this.storageService.saveImage(fileItem);
-      // Reset the file input after the image is saved.
-      setTimeout(() => {
+    // Check if the file is an image.
+    if (file.type.includes('image')) {
+      // Check if image sixe is less than 1MB.
+      if (file.size < 1000000) {
+        // Image to base64.
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          // Set file item
+          const fileItem = {
+            id: file.name.split(' ').join('-').toLowerCase().split('.')[0],
+            userId: this.user.email,
+            title: file.name.split('.')[0],
+            url: reader.result as string,
+            albumId: 1,
+            createdAt: new Date().toISOString(),
+            size: file.size,
+            sizeInKb: Math.round(file.size / 1024),
+          };
+          // Add the photo to the list.
+          this.photoList.push(fileItem);
+          // Save the image.
+          this.storageService.saveImage(fileItem);
+          // Reset the file input after the image is saved.
+          setTimeout(() => {
+            event.target.value = '';
+          }, 1000);
+        };
+      } else {
+        // Show error message.
+        this.globalService.setShowAlert.next({
+          show: true,
+          message: 'Image size should be less than 1MB.',
+          type: 'error',
+        });
+        // Reset the file input.
         event.target.value = '';
-      }, 1000);
-    };
+      }
+    } else {
+      // Show error message.
+      this.globalService.setShowAlert.next({
+        show: true,
+        message: 'Please upload an image file.',
+        type: 'error',
+      });
+      // Reset the file input.
+      event.target.value = '';
+    }
   }
 
   /**
