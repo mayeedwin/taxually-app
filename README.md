@@ -40,4 +40,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - State management is done using **RxJS** and **Ngrx** (Work in progress).
 
+  - The App preview is hosted on **Firebase**. [Click here](https://taxually-assessment.web.app/) to view the app.
+
+  - Setup GitHub actions to build and deploy the app to Firebase on every push to the main branch.
+
 To view setup instructions, please visit the [setup instructions]('https://github.com/mayeedwin/taxually-app/blob/main/SETUP.md').
