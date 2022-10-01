@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   photoList: PhotoItem[] = [];
   originalList: PhotoItem[] = [];
   searchText: string = '';
-  sortType = 'size-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
+  sortType = 'date-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
   filterType = 'all' as 'all' | 'smallest' | 'largest';
 
   constructor(

@@ -65,8 +65,12 @@ export class StorageService {
           (saved: { userId: string | number }) => saved.userId === userId
         )
       : savedPhotoList;
-    // Return the photo list.
-    return this.photoList;
+    // Return the photo list sorted by date created.
+    return this.photoList.sort((a, b) => {
+      const dateA = new Date(a.createdAt) as Date;
+      const dateB = new Date(b.createdAt) as Date;
+      return dateA.getTime() - dateB.getTime();
+    });
   }
 
   /**
