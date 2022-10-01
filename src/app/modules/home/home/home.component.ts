@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   searchText: string = '';
   sortType = 'date-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
   filterType = 'all' as 'all' | 'smallest' | 'largest';
+  uploading = false;
 
   constructor(
     private authService: AuthService,
@@ -110,6 +111,8 @@ export class HomeComponent implements OnInit {
     const file = event.target.files[0];
     // Check if the file is an image.
     if (file.type.includes('image')) {
+      // Set uploading to true.
+      this.uploading = true;
       // Check if image sixe is less than 1MB.
       if (file.size < 1000000) {
         // Image to base64.
@@ -133,6 +136,8 @@ export class HomeComponent implements OnInit {
           this.storageService.saveImage(fileItem);
           // Reset the file input after the image is saved.
           setTimeout(() => {
+            // Set uploading to false.
+            this.uploading = false;
             event.target.value = '';
           }, 1000);
         };
@@ -145,6 +150,8 @@ export class HomeComponent implements OnInit {
         });
         // Reset the file input.
         event.target.value = '';
+        // Set uploading to false.
+        this.uploading = false;
       }
     } else {
       // Show error message.
@@ -155,6 +162,8 @@ export class HomeComponent implements OnInit {
       });
       // Reset the file input.
       event.target.value = '';
+      // Set uploading to false.
+      this.uploading = false;
     }
   }
 

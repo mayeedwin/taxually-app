@@ -4,6 +4,7 @@
   <div class="nav-item-title-info">Note : Max file size for upload is 1MB</div>
   <nav>
     <input
+      [disabled]="uploading"
       class="nav-item nav-item-file-input"
       type="file"
       id="file"
