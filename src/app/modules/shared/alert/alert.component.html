@@ -1,0 +1,12 @@
+<div
+  *ngIf="showAlert"
+  class="alert"
+  [ngClass]="{
+    'alert-success': alertType === 'success'
+  }"
+>
+  <div class="alert-message">{{ alertMessage }}</div>
+  <button type="button" class="close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

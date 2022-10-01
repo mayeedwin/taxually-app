@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PhotoItem } from 'src/app/models/index.model';
+import { GlobalService } from '../global/global.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class StorageService {
   // Properties.
   photoList: PhotoItem[] = [];
 
-  constructor() {
+  constructor(private globalService: GlobalService) {
     // Get the photo list from local storage.
     const savedPhotoList = JSON.parse(
       localStorage.getItem('photoList') || '[]'
@@ -35,9 +36,21 @@ export class StorageService {
         }
         return item;
       });
+      // Show alert.
+      this.globalService.setShowAlert.next({
+        show: true,
+        message: 'Image updated successfully.',
+        type: 'success',
+      });
     } else {
       // Save the image to local storage.
       this.setStorage([...this.photoList, image]);
+      // Show alert.
+      this.globalService.setShowAlert.next({
+        show: true,
+        message: 'Image saved successfully.',
+        type: 'success',
+      });
     }
   }
 
