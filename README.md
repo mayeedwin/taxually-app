@@ -12,6 +12,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [x] User can view their uploaded photos
 - [x] User can sort their photos by date and size.
 - [x] User can filter their photos by size aka largest or smallest.
+- [x] Alert messages are displayed when a user performs an action for e.g uploading or deleting a photo.
 
 ## App Architecture
 
@@ -23,9 +24,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - Home module has the home component and the home routing module.
 
-  - Shared module has the photo component, that can be accross the app.
+  - Shared module has the **photo** and **alert** components which are shared across the app.
 
-- [x] Has a services folder, which has the **auth**, **storage**, and **guard** services.
+- [x] Has a services folder, which has the **global**, **auth**, **storage**, **guard** services.
+
+  - Global service has the **setShowAlert** subject, which is used to show the alert message.
 
   - Auth service has the **signup**, **login**, **logout**, and **setUsers** methods as key features.
 
