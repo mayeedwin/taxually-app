@@ -13,4 +13,13 @@ export class PhotoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  /**
+   * This method handles image delete.
+   * @method deleteFile
+   */
+  deleteFile() {
+    const id = this.data.id;
+    console.log(id);
+  }
 }
