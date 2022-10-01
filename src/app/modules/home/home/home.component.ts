@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoItem, User } from 'src/app/models/index.model';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { GlobalService } from 'src/app/services/global/global.service';
-import { StorageService } from 'src/app/services/storage/storage.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { GlobalService } from '../../../services/global/global.service';
+import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.user = this.authService.getCurrentUser() as User;
     if (this.user) {
       this.photoList = this.storageService.getSavedPhotos(this.user.email);
-      this.originalList = this.photoList;
+      this.originalList = this.storageService.getSavedPhotos(this.user.email);
     }
   }
 
@@ -51,23 +51,25 @@ export class HomeComponent implements OnInit {
    * @method sortFiles
    */
   sortFiles() {
+    // Set list to default.
+    this.originalList = this.storageService.getSavedPhotos(this.user.email);
     // Sort the photo list.
     switch (this.sortType) {
       case 'size-asc':
-        this.photoList = this.photoList.sort((a, b) => a.size - b.size);
+        this.photoList = this.originalList.sort((a, b) => a.size - b.size);
         break;
       case 'size-desc':
-        this.photoList = this.photoList.sort((a, b) => b.size - a.size);
+        this.photoList = this.originalList.sort((a, b) => b.size - a.size);
         break;
       case 'date-asc':
-        this.photoList = this.photoList.sort((a, b) => {
+        this.photoList = this.originalList.sort((a, b) => {
           const dateA = new Date(a.createdAt);
           const dateB = new Date(b.createdAt);
           return dateA.getTime() - dateB.getTime();
         });
         break;
       case 'date-desc':
-        this.photoList = this.photoList.sort((a, b) => {
+        this.photoList = this.originalList.sort((a, b) => {
           const dateA = new Date(a.createdAt);
           const dateB = new Date(b.createdAt);
           return dateB.getTime() - dateA.getTime();
@@ -80,6 +82,8 @@ export class HomeComponent implements OnInit {
    * @method filterFiles
    */
   filterFiles() {
+    // Set list to default.
+    this.originalList = this.storageService.getSavedPhotos(this.user.email);
     // Filter the photo list.
     switch (this.filterType) {
       case 'all':

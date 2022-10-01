@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { GlobalService } from 'src/app/services/global/global.service';
+import { GlobalService } from '../../../services/global/global.service';
 
 @Component({
   selector: 'app-alert',
