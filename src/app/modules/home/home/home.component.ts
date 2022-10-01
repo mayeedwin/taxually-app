@@ -168,6 +168,12 @@ export class HomeComponent implements OnInit {
     this.originalList = this.originalList.filter((photo) => photo.id !== id);
     // Save the photo list.
     this.storageService.setStorage(this.originalList);
+    // Show success message.
+    this.globalService.setShowAlert.next({
+      show: true,
+      message: 'Image deleted successfully.',
+      type: 'success',
+    });
   }
 
   /**
