@@ -1,5 +1,5 @@
 export interface PhotoItem {
-  id: number;
+  id: number | string;
   albumId: number;
   title: string;
   url: string;

@@ -18,7 +18,11 @@
     class="photo-listing"
     *ngIf="photoList && photoList.length > 0; else noPhotos"
   >
-    <app-photo *ngFor="let photo of photoList" [data]="photo"></app-photo>
+    <app-photo
+      *ngFor="let photo of photoList"
+      [data]="photo"
+      (deleteFileEvent)="deleteFile($event)"
+    ></app-photo>
   </section>
   <ng-template #noPhotos>
     <div class="no-photos">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PhotoItem } from 'src/app/models';
 
 @Component({
@@ -9,6 +9,7 @@ import { PhotoItem } from 'src/app/models';
 export class PhotoComponent implements OnInit {
   // Input.
   @Input() data!: PhotoItem;
+  @Output() deleteFileEvent = new EventEmitter();
 
   constructor() {}
 
@@ -20,6 +21,6 @@ export class PhotoComponent implements OnInit {
    */
   deleteFile() {
     const id = this.data.id;
-    console.log(id);
+    this.deleteFileEvent.emit(id);
   }
 }

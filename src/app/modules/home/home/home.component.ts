@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
+    this.photoList = this.storageService.getSavedPhotos();
   }
 
   ngOnInit(): void {
@@ -46,7 +47,22 @@ export class HomeComponent implements OnInit {
       this.photoList.push(fileItem);
       // Save the image.
       this.storageService.saveImage(fileItem);
+      // Reset the file input after the image is saved.
+      setTimeout(() => {
+        event.target.value = '';
+      }, 2000);
     };
+  }
+
+  /**
+   * This method handles image delete.
+   * @method deleteFile
+   */
+  deleteFile(id: string) {
+    // Delete the photo.
+    this.photoList = this.photoList.filter((photo) => photo.id !== id);
+    // Save the photo list.
+    this.storageService.setStorage(this.photoList);
   }
 
   /**
