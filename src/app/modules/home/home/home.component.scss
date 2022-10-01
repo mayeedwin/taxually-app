@@ -50,8 +50,45 @@
   margin-bottom: 10px;
 }
 
+.nav-item-title-info {
+  font-size: 13px;
+  color: rgb(222, 89, 89);
+  margin-bottom: 10px;
+}
+
 .photo-listing {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+}
+
+.search-input {
+  background: #fff;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: inline-block;
+
+  input {
+    padding: 10px 15px;
+    border: 0;
+    outline: 0;
+    transition: all 0.2s ease-in-out;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-right: 1px solid #ccc;
+
+    &:focus {
+      border: 1px solid #222;
+    }
+  }
+
+  button {
+    border-radius: 0;
+    border: 0;
+    outline: 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px 15px;
+  }
 }

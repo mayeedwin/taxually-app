@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
     this.signupForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      signupEmail: ['', [Validators.required, Validators.email]],
+      signupPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -73,7 +73,32 @@ export class LoginComponent implements OnInit {
         break;
       case 'signup':
         // Sign up.
-        console.log('Sign up', this.signupForm.value);
+        const { firstName, lastName, signupEmail, signupPassword } =
+          this.signupForm.value;
+        const signupRes = this.authService.signup({
+          // Sign up the user.
+          firstName,
+          lastName,
+          email: signupEmail,
+          password: signupPassword,
+        });
+        // Check the response.
+        if (signupRes.status === 'success') {
+          // Authenticate the user.
+          this.authService.login(signupEmail, signupPassword);
+          // Navigate to the dashboard.
+          this.router.navigate(['/']);
+        } else {
+          // Show an error message.
+          this.alert = {
+            show: true,
+            message: signupRes.message,
+          };
+          // Hide the alert after 3 seconds.
+          setTimeout(() => {
+            this.alert.show = false;
+          }, 3000);
+        }
         break;
       default:
         break;

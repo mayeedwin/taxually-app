@@ -28,7 +28,6 @@ export class StorageService {
     );
     // If image exists, return.
     if (imageExists) {
-      console.log('Image already exists.');
       // Update the image.
       this.photoList = this.photoList.map((item) => {
         if (item.id === image.id) {
@@ -55,13 +54,17 @@ export class StorageService {
    * This method returns saved photos.
    * @method getSavedPhotos
    */
-  getSavedPhotos() {
+  getSavedPhotos(userId?: string | number) {
     // Get the photo list from local storage.
     const savedPhotoList = JSON.parse(
       localStorage.getItem('photoList') || '[]'
     );
-    // Set the photo list.
-    this.photoList = savedPhotoList;
+    // Set the photo list, for a specific user.
+    this.photoList = userId
+      ? savedPhotoList.filter(
+          (saved: { userId: string | number }) => saved.userId === userId
+        )
+      : savedPhotoList;
     // Return the photo list.
     return this.photoList;
   }

@@ -11,6 +11,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class HomeComponent implements OnInit {
   user!: User;
   photoList: PhotoItem[] = [];
+  originalList: PhotoItem[] = [];
+  searchText: string = '';
 
   constructor(
     private authService: AuthService,
@@ -18,11 +20,33 @@ export class HomeComponent implements OnInit {
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
-    this.photoList = this.storageService.getSavedPhotos();
+    this.photoList = this.storageService.getSavedPhotos(this.user.email);
+    this.originalList = this.photoList;
   }
 
   ngOnInit(): void {
     // Log the user.
+  }
+
+  /**
+   * This method handles file search.
+   * @method searchFile
+   */
+  searchFile() {
+    // Search the photo list.
+    this.photoList = this.originalList.filter((photo) =>
+      photo.title.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
+
+  /**
+   * This method clears the search text.
+   * @method clearSearchText
+   */
+  clearSearchText() {
+    if (this.searchText.length < 3) {
+      this.photoList = this.originalList;
+    }
   }
 
   /**
@@ -39,6 +63,7 @@ export class HomeComponent implements OnInit {
       // Set file item
       const fileItem = {
         id: file.name.split(' ').join('-').toLowerCase().split('.')[0],
+        userId: this.user.email,
         title: file.name.split('.')[0],
         url: reader.result as string,
         albumId: 1,
@@ -50,7 +75,7 @@ export class HomeComponent implements OnInit {
       // Reset the file input after the image is saved.
       setTimeout(() => {
         event.target.value = '';
-      }, 2000);
+      }, 1000);
     };
   }
 
@@ -61,8 +86,9 @@ export class HomeComponent implements OnInit {
   deleteFile(id: string) {
     // Delete the photo.
     this.photoList = this.photoList.filter((photo) => photo.id !== id);
+    this.originalList = this.originalList.filter((photo) => photo.id !== id);
     // Save the photo list.
-    this.storageService.setStorage(this.photoList);
+    this.storageService.setStorage(this.originalList);
   }
 
   /**

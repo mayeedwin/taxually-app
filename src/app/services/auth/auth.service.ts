@@ -51,6 +51,48 @@ export class AuthService {
   }
 
   /**
+   * This method signs up a user.
+   * @method signup
+   */
+  signup(data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) {
+    // Save the user to local storage.
+    const currentUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    // Check if the user exists.
+    const userExists = currentUsers.find(
+      (user: { email: string }) => user.email === data.email
+    );
+    // Check if the user exists.
+    if (userExists) {
+      return {
+        status: 'error',
+        message: 'User already exists',
+        data: null,
+      };
+    } else {
+      // Create the user.
+      const user = {
+        id: currentUsers.length + 1,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+      };
+      // Save the user to local storage.
+      this.setUsers([...currentUsers, user]);
+      return {
+        status: 'success',
+        message: 'Signup successful',
+        data: user,
+      };
+    }
+  }
+
+  /**
    * This  method logs in a user.
    * @method login
    */

@@ -1,5 +1,6 @@
 <section class="home">
   <div class="nav-item-title">Taxually.com</div>
+  <div class="nav-item-title-info">Note : Max file size for upload is 1MB</div>
   <nav>
     <input
       class="nav-item nav-item-file-input"
@@ -14,6 +15,17 @@
       <button (click)="logout()">Signout</button>
     </div>
   </nav>
+  <section class="search">
+    <div class="search-input">
+      <input
+        type="search"
+        placeholder="Search for a photo..."
+        [(ngModel)]="searchText"
+        (keyup)="clearSearchText()"
+      />
+      <button (click)="searchFile()">Search</button>
+    </div>
+  </section>
   <section
     class="photo-listing"
     *ngIf="photoList && photoList.length > 0; else noPhotos"
