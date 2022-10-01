@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {
     // Set up the login form.
     this.loginForm = this.fb.group({
@@ -41,7 +43,25 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Set the page title.
+    this.titleService.setTitle('Login - Taxually Assessment');
+  }
+
+  /**
+   * This method sets auth view.
+   * @method setAuthView
+   */
+  setAuthView(view: 'login' | 'signup') {
+    // Set the view.
+    this.showLogin = view === 'login' ? true : false;
+    // Set the page title.
+    this.titleService.setTitle(
+      this.showLogin
+        ? 'Login - Taxually Assessment'
+        : 'Signup - Taxually Assessment'
+    );
+  }
 
   /**
    * This method handles form submission.

@@ -25,7 +25,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - Shared module has the photo component, that can be accross the app.
 
-- [x] Has a services folder, which has the auth, storage, and guard services.
+- [x] Has a services folder, which has the **auth**, **storage**, and **guard** services.
 
   - Auth service has the **signup**, **login**, **logout**, and **setUsers** methods as key features.
 

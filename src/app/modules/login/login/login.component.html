@@ -52,7 +52,8 @@
         Login
       </button>
       <div class="form-info-group">
-        Don't have an account? <span (click)="showLogin = false">Signup</span>
+        Don't have an account?
+        <span (click)="setAuthView('signup')">Signup</span>
       </div>
     </form>
     <ng-template #signupView>
@@ -152,7 +153,7 @@
         </button>
         <div class="form-info-group">
           Already have an account?
-          <span (click)="showLogin = true">Login</span>
+          <span (click)="setAuthView('login')">Login</span>
         </div>
       </form>
     </ng-template>
