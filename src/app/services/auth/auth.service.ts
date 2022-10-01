@@ -88,6 +88,15 @@ export class AuthService {
   }
 
   /**
+   * This method checks if user is logged in.
+   * @method isLoggedIn
+   */
+  isLoggedIn(): boolean {
+    // Check if the user exists.
+    return this.getCurrentUser() ? true : false;
+  }
+
+  /**
    * This method logs out a user.
    * @method logout
    */
