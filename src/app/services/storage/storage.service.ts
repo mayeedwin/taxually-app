@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PhotoItem } from 'src/app/models';
+import { PhotoItem } from 'src/app/models/index.model';
 
 @Injectable({
   providedIn: 'root',

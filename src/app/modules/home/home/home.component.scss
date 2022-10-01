@@ -92,3 +92,23 @@
     padding: 10px 15px;
   }
 }
+
+/** Media Queries **/
+@media screen and (max-width: 540px) {
+  .photo-listing {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .home {
+    nav {
+      gap: 10px;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+    }
+
+    .nav-item:last-child {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+}

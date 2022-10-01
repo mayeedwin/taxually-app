@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PhotoItem, User } from 'src/app/models';
+import { PhotoItem, User } from 'src/app/models/index.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
