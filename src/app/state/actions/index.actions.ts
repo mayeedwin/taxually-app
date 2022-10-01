@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { PhotoItem } from '../models/index.model';
+import { PhotoItem } from '../../models/index.model';
 
 // Get files action.
 export const getFiles = createAction(
