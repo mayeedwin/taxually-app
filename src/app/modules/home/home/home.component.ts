@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PhotoItem, User } from 'src/app/models/index.model';
-import { loadPhotos } from 'src/app/state/actions/index.actions';
+import {
+  addPhoto,
+  filterPhotos,
+  loadPhotos,
+  removePhoto,
+  sortPhotos,
+} from 'src/app/state/actions/index.actions';
 import { selectPhotosState } from 'src/app/state/index.state';
 import { AuthService } from '../../../services/auth/auth.service';
 import { GlobalService } from '../../../services/global/global.service';
@@ -62,30 +68,8 @@ export class HomeComponent implements OnInit {
    * @method sortFiles
    */
   sortFiles() {
-    // Set list to default.
-    this.originalList = this.storageService.getSavedPhotos(this.user.email);
-    // Sort the photo list.
-    switch (this.sortType) {
-      case 'size-asc':
-        this.photoList = this.originalList.sort((a, b) => a.size - b.size);
-        break;
-      case 'size-desc':
-        this.photoList = this.originalList.sort((a, b) => b.size - a.size);
-        break;
-      case 'date-asc':
-        this.photoList = this.originalList.sort((a, b) => {
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return dateA.getTime() - dateB.getTime();
-        });
-        break;
-      case 'date-desc':
-        this.photoList = this.originalList.sort((a, b) => {
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return dateB.getTime() - dateA.getTime();
-        });
-    }
+    // Dispatch the action to sort the photos.
+    this.store.dispatch(sortPhotos({ sortType: this.sortType }));
   }
 
   /**
@@ -93,20 +77,12 @@ export class HomeComponent implements OnInit {
    * @method filterFiles
    */
   filterFiles() {
-    // Set list to default.
+    // Get original list.
     this.originalList = this.storageService.getSavedPhotos(this.user.email);
-    // Filter the photo list.
-    switch (this.filterType) {
-      case 'all':
-        this.photoList = this.originalList;
-        break;
-      case 'smallest':
-        this.photoList = [this.originalList.sort((a, b) => a.size - b.size)[0]];
-        break;
-      case 'largest':
-        this.photoList = [this.originalList.sort((a, b) => b.size - a.size)[0]];
-        break;
-    }
+    // Dispatch the action to filter the photos.
+    this.store.dispatch(
+      filterPhotos({ filterType: this.filterType, data: this.originalList })
+    );
   }
 
   /**
@@ -148,10 +124,9 @@ export class HomeComponent implements OnInit {
             sizeInKb: Math.round(file.size / 1024),
           };
           // Save the image.
-          this.photoList = this.storageService.saveImage(
-            fileItem,
-            this.user.email
-          );
+          this.storageService.saveImage(fileItem, this.user.email);
+          // Dispatch the action to add a photo.
+          this.store.dispatch(addPhoto({ photo: fileItem }));
           // Reset the file input after the image is saved.
           setTimeout(() => {
             // Set uploading to false.
@@ -191,10 +166,9 @@ export class HomeComponent implements OnInit {
    */
   deleteFile(id: string) {
     // Delete the image.
-    const list = this.storageService.deletePhoto(id, this.user.email);
-    // Update the photo list.
-    this.photoList = list;
-    this.originalList = list;
+    this.storageService.deletePhoto(id, this.user.email);
+    // Dispatch the action remove the photo.
+    this.store.dispatch(removePhoto({ id }));
   }
 
   /**

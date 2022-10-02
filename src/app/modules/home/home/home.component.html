@@ -47,10 +47,10 @@
   </section>
   <section
     class="photo-listing"
-    *ngIf="photoList && photoList.length > 0; else noPhotos"
+    *ngIf="(photos$ | async) && (photos$ | async)?.length !== 0; else noPhotos"
   >
     <app-photo
-      *ngFor="let photo of photoList"
+      *ngFor="let photo of photos$ | async"
       [data]="photo"
       (deleteFileEvent)="deleteFile($event)"
     ></app-photo>

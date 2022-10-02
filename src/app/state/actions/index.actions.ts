@@ -25,3 +25,19 @@ export const removePhoto = createAction(
   '[Photos] Remove Photo',
   props<{ id: string }>()
 );
+
+/**
+ * Action to sort the list of saved photos
+ */
+export const sortPhotos = createAction(
+  '[Photos] Sort Photos',
+  props<{ sortType: 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc' }>()
+);
+
+/**
+ * Action to filter the list of saved photos
+ */
+export const filterPhotos = createAction(
+  '[Photos] Filter Photos',
+  props<{ filterType: 'all' | 'smallest' | 'largest'; data: PhotoItem[] }>()
+);
