@@ -41,8 +41,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - Tests using **jest** and **jest-preset-angular**.
 
-  - The App preview is hosted on **Firebase**. [Click here](https://taxually-assesment.web.app/) to view the app.
+  - The App Preview is hosted on **Firebase**. [Click here](https://taxually-assesment.web.app/) to view the app.
 
-  - Setup GitHub actions to build and deploy the app to Firebase on every push to the main branch.
+  - GitHub Actions to build and deploy the app to Firebase on every push to the main branch.
 
-To view setup instructions, please visit the [setup instructions]('https://github.com/mayeedwin/taxually-app/blob/main/SETUP.md').
+To view setup instructions, please view the **SETUP.md** file.
