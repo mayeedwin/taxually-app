@@ -13,17 +13,7 @@ export class AuthService {
     // Check if there are users in local storage.
     const users = localStorage.getItem('users');
     // Set the users.
-    const usersInDB = users
-      ? JSON.parse(users)
-      : [
-          {
-            id: 1,
-            firstName: 'Maye',
-            lastName: 'Edwin',
-            email: 'em@sky.garden',
-            password: '123456',
-          },
-        ];
+    const usersInDB = users ? JSON.parse(users) : [];
     // Set the users in the database.
     this.setUsers(usersInDB);
   }
