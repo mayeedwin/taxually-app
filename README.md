@@ -41,7 +41,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [x] Tests using **jest** and **jest-preset-angular**.
 
-### Deployment, CI/CD, and Hosting
+## Deployment, CI/CD, and Hosting
 
 - The App Preview is hosted on **Firebase**. [Click here](https://taxually-assesment.web.app/) to view the app.
 
