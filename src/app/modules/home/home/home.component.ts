@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { PhotoItem, User } from 'src/app/models/index.model';
+import { loadPhotos } from 'src/app/state/actions/index.actions';
+import { selectPhotosState } from 'src/app/state/index.state';
 import { AuthService } from '../../../services/auth/auth.service';
 import { GlobalService } from '../../../services/global/global.service';
 import { StorageService } from '../../../services/storage/storage.service';
@@ -17,17 +20,25 @@ export class HomeComponent implements OnInit {
   sortType = 'date-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
   filterType = 'all' as 'all' | 'smallest' | 'largest';
   uploading = false;
+  photos$ = this.store.select(selectPhotosState);
 
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private store: Store
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
     if (this.user) {
       this.photoList = this.storageService.getSavedPhotos(this.user.email);
       this.originalList = this.storageService.getSavedPhotos(this.user.email);
+      // Dispatch the action to load the photos.
+      this.store.dispatch(
+        loadPhotos({
+          photos: this.storageService.getSavedPhotos(this.user.email),
+        })
+      );
     }
   }
 
