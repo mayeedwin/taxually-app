@@ -80,41 +80,55 @@ export class HomeComponent implements OnInit {
     const file = event.target.files[0];
     // Check if the file is an image.
     if (file.type.includes('image')) {
-      // Set uploading to true.
-      this.uploading = true;
-      // Check if image sixe is less than 1MB.
-      if (file.size < 1000000) {
-        // Image to base64.
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          // Set file item
-          const fileItem = {
-            id: file.name.split(' ').join('-').toLowerCase().split('.')[0],
-            userId: this.user.email,
-            title: file.name.split('.')[0],
-            url: reader.result as string,
-            albumId: 1,
-            createdAt: new Date().toISOString(),
-            size: file.size,
-            sizeInKb: Math.round(file.size / 1024),
+      // Check if the image is of type jpeg or png.
+      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+        // Set uploading to true.
+        this.uploading = true;
+        // Check if image sixe is less than 1MB.
+        if (file.size < 1000000) {
+          // Image to base64.
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            // Set file item
+            const fileItem = {
+              id: file.name.split(' ').join('-').toLowerCase().split('.')[0],
+              userId: this.user.email,
+              title: file.name.split('.')[0],
+              url: reader.result as string,
+              albumId: 1,
+              createdAt: new Date().toISOString(),
+              size: file.size,
+              sizeInKb: Math.round(file.size / 1024),
+            };
+            // Save the image.
+            this.storageService.saveImage(fileItem, this.user.email);
+            // Dispatch the action to add a photo.
+            this.store.dispatch(addPhoto({ photo: fileItem }));
+            // Reset the file input after the image is saved.
+            setTimeout(() => {
+              // Set uploading to false.
+              this.uploading = false;
+              event.target.value = '';
+            }, 1000);
           };
-          // Save the image.
-          this.storageService.saveImage(fileItem, this.user.email);
-          // Dispatch the action to add a photo.
-          this.store.dispatch(addPhoto({ photo: fileItem }));
-          // Reset the file input after the image is saved.
-          setTimeout(() => {
-            // Set uploading to false.
-            this.uploading = false;
-            event.target.value = '';
-          }, 1000);
-        };
+        } else {
+          // Show error message.
+          this.globalService.setShowAlert.next({
+            show: true,
+            message: 'Image size should be less than or max 1MB.',
+            type: 'error',
+          });
+          // Reset the file input.
+          event.target.value = '';
+          // Set uploading to false.
+          this.uploading = false;
+        }
       } else {
         // Show error message.
         this.globalService.setShowAlert.next({
           show: true,
-          message: 'Image size should be less than 1MB.',
+          message: 'Image type should be jpeg or png.',
           type: 'error',
         });
         // Reset the file input.
