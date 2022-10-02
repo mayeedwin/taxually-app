@@ -11,7 +11,7 @@ import {
   removePhoto,
   sortPhotos,
 } from 'src/app/state/actions/index.actions';
-import { selectPhotosState } from 'src/app/state/index.state';
+import { selectPhotosState } from 'src/app/state/selectors/index.selectors';
 
 @Component({
   selector: 'app-home',
