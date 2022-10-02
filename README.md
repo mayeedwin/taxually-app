@@ -37,12 +37,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
   - The auth guard is used to **protect the home route**, and the login guard is used **to redirect the user to the home route** if they are already logged in.
 
-  - State management using **RxJS** and **Ngrx**. State management is done using the **state** folder, which has the **actions**, **reducers**, and **selectors**.
+- [x] State management using **RxJS** and **Ngrx**. State management is done using the **state** folder, which has the **actions**, **reducers**, and **selectors**.
 
-  - Tests using **jest** and **jest-preset-angular**.
+- [x] Tests using **jest** and **jest-preset-angular**.
 
-  - The App Preview is hosted on **Firebase**. [Click here](https://taxually-assesment.web.app/) to view the app.
+### Deployment, CI/CD, and Hosting
 
-  - GitHub Actions to build and deploy the app to Firebase on every push to the main branch.
+- The App Preview is hosted on **Firebase**. [Click here](https://taxually-assesment.web.app/) to view the app.
 
-To view setup instructions, please view the **SETUP.md** file.
+- GitHub Actions to build and deploy the app to Firebase on every push to the main branch.
+
+- To view setup instructions, please view the **SETUP.md** file.
+
+Cheers!
