@@ -19,6 +19,9 @@
   gap: 10px;
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--white-1);
     border: none;
     border-radius: 3px;
