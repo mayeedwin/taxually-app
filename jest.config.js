@@ -6,11 +6,12 @@ module.exports = {
   roots: ["<rootDir>/src/"],
   testMatch: ["**/+(*.)+(spec).+(ts)"],
   setupFilesAfterEnv: ["<rootDir>/src/test.ts"],
-  
   collectCoverage: true,
   coverageReporters: ["html"],
   coverageDirectory: "coverage/my-app",
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, {
     prefix: "<rootDir>/",
   }),
+  rootDir: "./",
+  modulePaths: ["<rootDir>"],
 };

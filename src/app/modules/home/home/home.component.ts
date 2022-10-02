@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PhotoItem, User } from 'src/app/models/index.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { GlobalService } from 'src/app/services/global/global.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import {
   addPhoto,
   filterPhotos,
@@ -9,9 +12,6 @@ import {
   sortPhotos,
 } from 'src/app/state/actions/index.actions';
 import { selectPhotosState } from 'src/app/state/index.state';
-import { AuthService } from '../../../services/auth/auth.service';
-import { GlobalService } from '../../../services/global/global.service';
-import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-home',

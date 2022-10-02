@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SharedModule } from '../../shared/shared.module';
 
 import { HomeComponent } from './home.component';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('HomeComponent', () => {
   let dom: any;
@@ -12,6 +13,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideMockStore({})],
       imports: [RouterTestingModule, FormsModule, SharedModule],
       declarations: [HomeComponent],
     }).compileComponents();
