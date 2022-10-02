@@ -3,7 +3,6 @@ import { PhotoItem } from 'src/app/models/index.model';
 
 /**
  * Action to load all list of saved photos
- *
  */
 export const loadPhotos = createAction(
   '[Photos] Load Photos(User)',

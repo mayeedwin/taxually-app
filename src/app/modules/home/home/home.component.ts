@@ -20,7 +20,6 @@ import { selectPhotosState } from 'src/app/state/index.state';
 })
 export class HomeComponent implements OnInit {
   user!: User;
-  photoList: PhotoItem[] = [];
   originalList: PhotoItem[] = [];
   searchText: string = '';
   sortType = 'date-asc' as 'size-asc' | 'size-desc' | 'date-asc' | 'date-desc';
@@ -37,8 +36,6 @@ export class HomeComponent implements OnInit {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
     if (this.user) {
-      this.photoList = this.storageService.getSavedPhotos(this.user.email);
-      this.originalList = this.storageService.getSavedPhotos(this.user.email);
       // Dispatch the action to load the photos.
       this.store.dispatch(
         loadPhotos({
@@ -50,17 +47,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Log the user.
-  }
-
-  /**
-   * This method handles file search.
-   * @method searchFile
-   */
-  searchFile() {
-    // Search the photo list.
-    this.photoList = this.originalList.filter((photo) =>
-      photo.title.toLowerCase().includes(this.searchText.toLowerCase())
-    );
   }
 
   /**
@@ -83,16 +69,6 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(
       filterPhotos({ filterType: this.filterType, data: this.originalList })
     );
-  }
-
-  /**
-   * This method clears the search text.
-   * @method clearSearchText
-   */
-  clearSearchText() {
-    if (this.searchText.length < 3) {
-      this.photoList = this.originalList;
-    }
   }
 
   /**
