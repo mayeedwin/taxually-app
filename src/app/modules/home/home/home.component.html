@@ -2,7 +2,7 @@
   <app-alert></app-alert>
   <div class="nav-item-title">Taxually.com</div>
   <div class="nav-item-title-info">Note : Max file size for upload is 1MB</div>
-  <nav>
+  <nav class="d-flex">
     <input
       [disabled]="uploading"
       class="nav-item nav-item-file-input"
@@ -17,7 +17,7 @@
       <button class="signout" (click)="logout()">Signout</button>
     </div>
   </nav>
-  <section class="home-ctas">
+  <section class="home-ctas d-flex">
     <div style="display: none" class="search-input">
       <input
         type="search"
@@ -26,7 +26,7 @@
       />
       <button>Search</button>
     </div>
-    <div class="sort">
+    <div class="sort d-flex">
       <span>Sort by</span>
       <select [(ngModel)]="sortType" (change)="sortFiles()">
         <option value="date-asc">Date created(asc)</option>
@@ -35,7 +35,7 @@
         <option value="size-desc">Size(desc)</option>
       </select>
     </div>
-    <div class="filter">
+    <div class="filter d-flex">
       <span>Filter by</span>
       <select [(ngModel)]="filterType" (change)="filterFiles()">
         <option value="all">All</option>

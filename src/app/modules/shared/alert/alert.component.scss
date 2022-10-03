@@ -1,6 +1,4 @@
 .alert {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   position: fixed;
   right: 20px;
@@ -19,8 +17,6 @@
   gap: 10px;
 
   button {
-    display: flex;
-    align-items: center;
     justify-content: center;
     background-color: var(--white-1);
     border: none;
