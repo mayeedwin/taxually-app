@@ -136,6 +136,6 @@ export class AuthService {
     // Remove the user from local storage.
     localStorage.removeItem('user');
     // Navigate to the login page.
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 }
