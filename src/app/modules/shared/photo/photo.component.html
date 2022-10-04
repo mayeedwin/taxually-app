@@ -1,6 +1,12 @@
 <div *ngIf="data" class="photo">
   <div class="photo-holder">
-    <img class="photo-image" [src]="data.url" alt="T.X" />
+    <img
+      class="photo-image"
+      [src]="data.url"
+      alt="T.X"
+      [title]="data.title"
+      loading="lazy"
+    />
   </div>
   <div class="photo-content">
     <div class="photo-content-title">
