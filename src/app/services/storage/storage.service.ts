@@ -26,7 +26,9 @@ export class StorageService {
     // Get current list.
     const currentList = this.getSavedPhotos();
     // Check if image exists.
-    const imageExists = currentList.find((item) => item.id === image.id);
+    const imageExists = currentList.find(
+      (item) => item.id === image.id && item.userId === userId
+    );
     // If image exists, return.
     if (imageExists) {
       // Show alert.
