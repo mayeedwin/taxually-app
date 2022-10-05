@@ -93,9 +93,7 @@ export class StorageService {
   deletePhoto(id: string | number, userId: string | number) {
     // Delete the photo from the list, for a specific user.
     const newList = this.getSavedPhotos();
-    const filteredList = newList.filter(
-      (item) => item.id !== id && item.userId !== userId
-    );
+    const filteredList = newList.filter((item) => item.id !== id);
     // Set the photo list.
     this.setStorage(filteredList);
     // Show alert.
