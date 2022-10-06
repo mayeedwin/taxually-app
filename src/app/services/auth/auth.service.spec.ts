@@ -12,7 +12,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([
-          { path: 'login', component: LoginComponent },
+          { path: 'auth', component: LoginComponent },
         ]),
       ],
     });
