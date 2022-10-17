@@ -4,6 +4,11 @@ import {
   addPhoto,
   filterPhotos,
   loadPhotos,
+  photoAdded,
+  photoRemoved,
+  photosFiltered,
+  photosLoaded,
+  photosSorted,
   removePhoto,
   sortPhotos,
 } from '../actions/index.actions';
@@ -16,55 +21,16 @@ export const initialState: PhotoItem[] = [];
  */
 export const photosReducer = createReducer(
   initialState,
-  on(
-    loadPhotos,
-    (state, { photos }) =>
-      // Return the list of photos from the action.
-      photos
-  ),
-  on(addPhoto, (state, { photo }) =>
-    // Check if the photo already exists, if not add it to the list.
-    state.find((item) => item.id === photo.id) ? state : [...state, photo]
-  ),
-  on(removePhoto, (state, { id }) =>
-    // Filter out the photo with the given id.
-    state.filter((item) => item.id !== id)
-  ),
-  on(sortPhotos, (state, { sortType }) => {
-    // Sort the list of photos based on the sort type.
-    switch (sortType) {
-      case 'size-asc':
-        return [...state].sort((a, b) => a.size - b.size);
-      case 'size-desc':
-        return [...state].sort((a, b) => b.size - a.size);
-      case 'date-asc':
-        return [...state].sort((a, b) => {
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return dateA.getTime() - dateB.getTime();
-        });
-      case 'date-desc':
-        return [...state].sort((a, b) => {
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return dateB.getTime() - dateA.getTime();
-        });
-      default:
-        return state;
-    }
+  on(loadPhotos, (state) => state),
+  on(photosLoaded, (state, { photos }) => {
+    return [...state, ...photos];
   }),
-  on(filterPhotos, (state, { filterType, data }) => {
-    // Filter the list of photos based on the filter type.
-    const photos = [...data];
-    switch (filterType) {
-      case 'all':
-        return photos;
-      case 'smallest':
-        return photos.sort((a, b) => a.size - b.size).slice(0, 1);
-      case 'largest':
-        return photos.sort((a, b) => b.size - a.size).slice(0, 1);
-      default:
-        return state;
-    }
-  })
+  on(addPhoto, (state) => state),
+  on(photoAdded, (state, { photos }) =>  photos),
+  on(removePhoto, (state) => state),
+  on(photoRemoved, (state, { photos }) => photos),
+  on(sortPhotos, (state) => state),
+  on(photosSorted, (state, { photos }) => photos),
+  on(filterPhotos, (state) => state),
+  on(photosFiltered, (state, { photos }) => photos)
 );

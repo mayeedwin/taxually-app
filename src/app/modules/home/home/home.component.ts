@@ -35,18 +35,18 @@ export class HomeComponent implements OnInit {
   ) {
     // Set the user.
     this.user = this.authService.getCurrentUser() as User;
-    if (this.user) {
-      // Dispatch the action to load the photos.
-      this.store.dispatch(
-        loadPhotos({
-          photos: this.storageService.getSavedPhotos(this.user.email),
-        })
-      );
-    }
   }
 
   ngOnInit(): void {
     // Log the user.
+    if (this.user) {
+      // Dispatch the action to load the photos.
+      this.store.dispatch(
+        loadPhotos({
+          userId: this.user.email,
+        })
+      );
+    }
   }
 
   /**
@@ -55,7 +55,9 @@ export class HomeComponent implements OnInit {
    */
   sortFiles() {
     // Dispatch the action to sort the photos.
-    this.store.dispatch(sortPhotos({ sortType: this.sortType }));
+    this.store.dispatch(
+      sortPhotos({ sortType: this.sortType, userId: this.user.email })
+    );
   }
 
   /**
@@ -63,11 +65,9 @@ export class HomeComponent implements OnInit {
    * @method filterFiles
    */
   filterFiles() {
-    // Get original list.
-    this.originalList = this.storageService.getSavedPhotos(this.user.email);
     // Dispatch the action to filter the photos.
     this.store.dispatch(
-      filterPhotos({ filterType: this.filterType, data: this.originalList })
+      filterPhotos({ filterType: this.filterType, userId: this.user.email })
     );
   }
 
@@ -101,10 +101,10 @@ export class HomeComponent implements OnInit {
               size: file.size,
               sizeInKb: Math.round(file.size / 1024),
             };
-            // Save the image.
-            this.storageService.saveImage(fileItem, this.user.email);
             // Dispatch the action to add a photo.
-            this.store.dispatch(addPhoto({ photo: fileItem }));
+            this.store.dispatch(
+              addPhoto({ photo: fileItem, userId: this.user.email })
+            );
             // Reset the file input after the image is saved.
             setTimeout(() => {
               // Set uploading to false.
@@ -155,10 +155,8 @@ export class HomeComponent implements OnInit {
    * @method deleteFile
    */
   deleteFile(id: string) {
-    // Delete the image.
-    this.storageService.deletePhoto(id, this.user.email);
     // Dispatch the action remove the photo.
-    this.store.dispatch(removePhoto({ id }));
+    this.store.dispatch(removePhoto({ id, userId: this.user.email }));
   }
 
   /**

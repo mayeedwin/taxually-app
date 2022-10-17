@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { photosReducer } from './state/reducers/index.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { photosEffects } from './state/effects/index.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,7 @@ import { photosReducer } from './state/reducers/index.reducer';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([photosEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
